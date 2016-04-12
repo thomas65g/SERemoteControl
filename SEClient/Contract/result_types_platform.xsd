@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- PLATFORM: $Revision: 1.4 $ of $Date: 2009/07/07 12:59:33 $ -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="tf"
+           targetNamespace="tf"
+           elementFormDefault="qualified">
+
+    <!-- Platform Types -->
+    <xs:simpleType name="EDecimalResultState">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="eDecimalResultState_Valid" />
+            <xs:enumeration value="eDecimalResultState_NaN" />
+            <xs:enumeration value="eDecimalResultState_INF" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="DecimalResult">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="timestamp" type="xs:dateTime" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="state" type="tns:EDecimalResultState" />
+            <xs:element minOccurs="0" maxOccurs="1" nillable="false" name="value" type="tns:decfloat" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="IntegerResult">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="timestamp" type="xs:dateTime" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="value" type="xs:long" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="StringResult">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="timestamp" type="xs:dateTime" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="value" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>

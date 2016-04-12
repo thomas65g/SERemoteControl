@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="tf"
+           targetNamespace="tf"
+           elementFormDefault="qualified">
+
+    <!-- Import PDK result types -->
+    <xs:include schemaLocation="result_types_platform.xsd"/>
+    <xs:include schemaLocation="service.xsd"/>
+    <xs:include schemaLocation="importer.xsd"/>
+
+    <!-- TREASURE FLEET Types -->
+
+	<xs:simpleType name="EResultLimitState">
+        <xs:restriction base="xs:string">
+                    <xs:enumeration value="eResultLimit_NotChecked"/>
+                    <xs:enumeration value="eResultLimit_InRange"/>
+                    <xs:enumeration value="eResultLimit_OutUpper"/>
+                    <xs:enumeration value="eResultLimit_OutLower"/>
+                    <xs:enumeration value="eResultLimit_min"/>
+                    <xs:enumeration value="eResultLimit_max"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+	<xs:simpleType name="EResultQuality">
+        <xs:restriction base="xs:string">
+                    <xs:enumeration value="eDraftValue"/>
+                    <xs:enumeration value="eDraftValue_Stable"/>
+                    <xs:enumeration value="eManualEndpoint"/>
+                    <xs:enumeration value="eAutoEndpoint_Strict"/>
+                    <xs:enumeration value="eAutoEndpoint_Normal"/>
+                    <xs:enumeration value="eAutoEndpoint_Fast"/>
+                    <xs:enumeration value="eAutoEndpoint_UserDef"/>
+                    <xs:enumeration value="eTimedEndpoint"/>
+        </xs:restriction>
+    </xs:simpleType>
+<xs:complexType name="ResultPh">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="rawValue" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="rawValueUnit" type="tns:ECommonUnit " />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="rawTemperature" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="temperatureUnit" type="tns:ECommonUnit" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="resultValue" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="resultUnit" type="tns:ECommonUnit" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="resultQuality" type="tns:EResultQuality" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="resultLimitState" type="tns:EResultLimitState" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="timestamp" type="xs:dateTime" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ResultCnd">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="rawValue" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="rawValueUnit" type="tns:ECommonUnit" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="rawTemperature" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="temperatureUnit" type="tns:ECommonUnit" />
+			<xs:element minOccurs="1" maxOccurs="1" nillable="false" name="usedCC" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="cndMode" type="tns:ECondMode" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="resultValue" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="resultUnit" type="tns:ECommonUnit" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="resultQuality" type="tns:EResultQuality" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="resultLimitState" type="tns:EResultLimitState" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="timestamp" type="xs:dateTime" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ResultDO">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="rawValue" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="rawValueUnit" type="tns:ECommonUnit " />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="rawTemperature" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="temperatureUnit" type="tns:ECommonUnit" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="rawPressure" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="pressureUnit" type="tns:ECommonUnit" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="resultValue" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="resultUnit" type="tns:ECommonUnit" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="resultQuality" type="tns:EResultQuality" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="resultLimitState" type="tns:EResultLimitState" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="timestamp" type="xs:dateTime" />
+        </xs:sequence>
+    </xs:complexType>
+
+
+	<xs:complexType name="OUPData">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="doMgl" type="tns:decfloat" />
+			<xs:element minOccurs="1" maxOccurs="1" nillable="false" name="OxygenSaturation" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="rawTemperature" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="rawPressure" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="sali" type="tns:decfloat" />
+			<xs:element minOccurs="1" maxOccurs="1" nillable="false" name="datetime" type="xs:dateTime" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="resultQuality" type="tns:EResultQuality" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="analysisAction" type="tns:EMFAnalysisAction" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="analysisStatus" type="tns:EAnalysisStatus" />
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="ArrayOfOUPData">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" nillable="true" name="ArrayOfOUPData" type="tns:OUPData" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfOUPData" type="tns:ArrayOfOUPData" />
+
+	<xs:complexType name="BODResult">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="bottleBOD" type="tns:decfloat" />
+			<xs:element minOccurs="1" maxOccurs="1" nillable="false" name="bottleO2Depletion" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="elapsedSeconds" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="analysisAction" type="tns:EMFAnalysisAction" />
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="ArrayOfBODResult">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" nillable="true" name="ArrayOfBODResult" type="tns:BODResult" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfBODResult" type="tns:ArrayOfBODResult" />
+
+	<xs:complexType name="ArrayOfDecfloat">
+        <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" nillable="true" name="ArrayOfDecfloat" type="tns:decfloat" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ArrayOfDecfloat" type="tns:ArrayOfDecfloat" />
+
+	<xs:complexType name="ResultBcv">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="base" type="tns:ArrayOfOUPData" />
+			<xs:element minOccurs="1" maxOccurs="1" nillable="false" name="follow" type="tns:ArrayOfOUPData" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="result" type="tns:ArrayOfBODResult" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="standardDeviation" type="tns:decfloat" />
+			<xs:element minOccurs="1" maxOccurs="1" nillable="false" name="finalResult" type="tns:decfloat" />
+			<xs:element minOccurs="1" maxOccurs="1" nillable="false" name="doUnit" type="tns:ECommonUnit" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="tempUnit" type="tns:ECommonUnit" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="pressureUnit" type="tns:ECommonUnit" />
+			<xs:element minOccurs="1" maxOccurs="1" nillable="false" name="doResolution" type="tns:decfloat" />
+			<xs:element minOccurs="1" maxOccurs="1" nillable="false" name="bodResolution" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="timestamp" type="xs:dateTime" />
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="ResultBcvBlank">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="BCVBlankResult" type="tns:ResultBcv" />
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="ResultBcvSeed">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="BCVSeedResult" type="tns:ResultBcv" />
+			<xs:element minOccurs="1" maxOccurs="1" nillable="false" name="O2DepletionPercent" type="tns:ArrayOfDecfloat" />
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="ResultBcvStandard">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="BCVStandardResult" type="tns:ResultBcv" />
+			<xs:element minOccurs="1" maxOccurs="1" nillable="false" name="seedCorrectFactor" type="tns:ArrayOfDecfloat" />
+			<xs:element minOccurs="1" maxOccurs="1" nillable="false" name="blankCorrectFactor" type="tns:ArrayOfDecfloat" />
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="ResultBODSample">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="BCVSampleResult" type="tns:ResultBcv" />
+			<xs:element minOccurs="1" maxOccurs="1" nillable="false" name="seedCorrectFactor" type="tns:ArrayOfDecfloat" />
+			<xs:element minOccurs="1" maxOccurs="1" nillable="false" name="blankCorrectFactor" type="tns:ArrayOfDecfloat" />
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="ResultMFCalibrationPHISFET">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="defaultSlope" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="calMode" type="xs:short" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="offsetLimitStates" type="tns:ArrayOfShort" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="slopeLimitStates" type="tns:ArrayOfShort" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="sensorCalPoints" type="tns:ArrayOfPHISFETCalPointData" />
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="ResultMFCalibrationISE">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="defaultSlope" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="calibrationMode" type="xs:short" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="calibrationUnit" type="xs:short" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="ionType" type="xs:short" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="ionCharge" type="xs:byte" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="ionMolMass" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="offsetLimitStates" type="tns:ArrayOfShort" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="slopeLimitStates" type="tns:ArrayOfShort" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="sensorCalPoints" type="tns:ArrayOfISECalPointData" />
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="ResultMFCalibrationCND">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="cellConstantLimitState" type="tns:ArrayOfShort" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="sensorCalPoints" type="tns:CondCalPointData" />
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="ResultMFCalibrationDO">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="defaultSlope" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="slopeLimitState" type="xs:short" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="doSensorType" type="xs:short" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="salinityCorrectionFactor" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="sensorCalPoints" type="tns:ArrayOfDOCalPointData" />
+        </xs:sequence>
+    </xs:complexType>
+
+
+
+    <xs:complexType name="ResultAdjustmentParameters">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="true" name="adjustParameters" type="tns:ArrayOfSensorAdjustParameter" />
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="ResultISMStatisticsCommon">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="sensorSerialNumber" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="temperatureUnit" type="tns:ECommonUnit" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="maxTemperatureValue" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="maxTemperatureDate" type="xs:dateTime" />
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="ResultISMStatisticsPhDigital">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="sensorSerialNumber" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="temperatureUnit" type="tns:ECommonUnit" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="maxTemperatureValue" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="maxTemperatureDate" type="xs:dateTime" />			
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="averageTemperatureValue" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="measurementTimeUnit" type="tns:ECommonUnit" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="measurementTime" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="pHUnit" type="tns:ECommonUnit" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="averagePhValue" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="maxPhValue" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="maxPhDate" type="xs:dateTime" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="minPhValue" type="tns:decfloat" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="minPhDate" type="xs:dateTime" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="EAnalysisStatus">
+        <xs:restriction base="xs:string">
+                    <xs:enumeration value="eAnalysisStatusid_AnalysisStatus_OK"/>
+                    <xs:enumeration value="eAnalysisStatusid_AnalysisStatus_OKStar"/>
+                    <xs:enumeration value="eAnalysisStatusid_AnalysisStatus_Failed"/>
+                    <xs:enumeration value="eAnalysisStatusid_AnalysisStatus_Error"/>
+					<xs:enumeration value="eAnalysisStatusid_AnalysisStatus_CriticalError"/>
+                    <xs:enumeration value="eAnalysisStatusid_AnalysisStatus_Terminate"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+	<xs:complexType name="EndOfMethod">
+        <xs:sequence>
+	        <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="m_timestamp" type="xs:dateTime" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="m_eAnalysisStatus" type="tns:EAnalysisStatus" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="m_uiJobId" type="xs:short" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="m_user" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <!-- Treasure Fleet AnyResult Container -->
+    <xs:complexType name="TreasureFleetAnyResult">
+        <xs:sequence>
+            <xs:choice>
+                <xs:element name="DecimalResult" type="tns:DecimalResult" />
+                <xs:element name="IntegerResult" type="tns:IntegerResult" />
+                <xs:element name="StringResult" type="tns:StringResult" />
+                <xs:element name="ResultPh" type="tns:ResultPh" />
+                <xs:element name="ResultCnd" type="tns:ResultCnd" />
+                <xs:element name="ResultDO" type="tns:ResultDO" />
+			    <xs:element name="ResultMFCalibrationISE" type="tns:ResultMFCalibrationISE" />
+                <xs:element name="ResultMFCalibrationPHISFET" type="tns:ResultMFCalibrationPHISFET" />
+                <xs:element name="ResultMFCalibrationCND" type="tns:ResultMFCalibrationCND" />
+                <xs:element name="ResultMFCalibrationDO" type="tns:ResultMFCalibrationDO" />
+                <xs:element name="ResultBcvBlank" type="tns:ResultBcvBlank" />
+                <xs:element name="ResultBcvSeed" type="tns:ResultBcvSeed" />
+                <xs:element name="ResultBcvStandard" type="tns:ResultBcvStandard" />
+                <xs:element name="ResultBODSample" type="tns:ResultBODSample" />
+                <xs:element name="ResultAdjustmentParameters" type="tns:ResultAdjustmentParameters" />
+                <xs:element name="ResultISMStatisticsCommon" type="tns:ResultISMStatisticsCommon" />
+                <xs:element name="ResultISMStatisticsPhDigital" type="tns:ResultISMStatisticsPhDigital" />
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ResultMessage">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="rackid" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="slotid" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="groupid" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="unit" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="unitstring" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="precision" type="xs:int" />
+            <xs:element minOccurs="1" maxOccurs="1" nillable="false" name="result" type="tns:TreasureFleetAnyResult" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ResultMessage" type="tns:ResultMessage"/>
+
+    <xs:complexType name="Telegram">
+        <xs:sequence>
+          <xs:choice>
+			<xs:element name="ResultMessage" type="tns:ResultMessage" />
+			<xs:element name="method" type="tns:method" />
+			<xs:element name="EndOfMethod" type="tns:EndOfMethod" />
+		  </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="Telegram" type="tns:Telegram"/>
+
+
+</xs:schema>

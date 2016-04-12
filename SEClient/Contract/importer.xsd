@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- PLATFORM: $Revision: 1.1 $ of $Date: 2009/04/27 10:58:53 $ -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="tf"
+           targetNamespace="tf"
+           elementFormDefault="qualified">
+
+  <xs:complexType name="method">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="unbounded" name="mf" type="tns:record" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="method" type="tns:method" />
+
+  <xs:complexType name="record">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="param-list" type="tns:param-list" />
+	  <xs:element minOccurs="1" maxOccurs="1" name="sf-list" type="tns:sf-list"/>
+    </xs:sequence>
+    <xs:attribute name="type" type="xs:string" use="required" />
+  </xs:complexType>
+
+  <xs:element name="record" type="tns:record" />
+
+  <xs:complexType name="param-list">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="param" type="tns:param" />
+    </xs:sequence>
+  </xs:complexType>
+  
+ <xs:complexType name="sf-list">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="sf" type="tns:record" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="param" mixed="true">
+    <xs:choice>
+      <xs:sequence minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="item" type="tns:item" />
+      </xs:sequence>
+      <xs:element name="record" type="tns:record" />
+      <!-- @todo string is allowed too -->
+    </xs:choice>
+    <xs:attribute name="name" type="xs:string" use="required" />
+    <xs:attribute name="type" type="tns:pdk_datatypes" use="required" />
+    <xs:attribute name="sequenceType" type="tns:pdk_datatypes" use="optional" />
+    <xs:attribute name="recordType" type="xs:string" use="optional" />
+  </xs:complexType>
+
+  <xs:complexType name="item" mixed="true">
+    <xs:choice>
+      <xs:element name="record" type="tns:record" />
+      <!-- @todo string is allowed too -->
+    </xs:choice>
+  </xs:complexType>
+
+  <xs:simpleType name="pdk_datatypes">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="boolean" />
+      <xs:enumeration value="short" />
+      <xs:enumeration value="wstring" />
+      <xs:enumeration value="decfloat" />
+      <xs:enumeration value="long" />
+      <xs:enumeration value="datetime" />
+      <xs:enumeration value="sequence" />
+      <xs:enumeration value="record" />
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>
